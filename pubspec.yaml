@@ -1,0 +1,58 @@
+name: kliniku
+description: A new Flutter project.
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.1 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # iOS Icons
+  cupertino_icons: ^1.0.2
+  # One Time Onboarding
+  shared_preferences: ^2.0.13
+  # Curved Navigation
+  curved_navigation_bar: ^1.0.3
+  # ResponsiveSizer
+  sizer: ^2.0.15
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # flutter_lints: ^1.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/images/
+
+  fonts:
+    # Arimo
+    - family: Arimo
+      fonts:
+        - asset: fonts/Arimo-Regular.ttf
+        - asset: fonts/Arimo-Bold.ttf
+          weight: 700
+    # Montserrat
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-Regular.ttf
+        - asset: fonts/Montserrat-Bold.ttf
+          weight: 700
+    #  Nunito
+    - family: Nunito
+      fonts:
+        - asset: fonts/Nunito-Regular.ttf
+        - asset: fonts/Nunito-Bold.ttf
+    # Roboto
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
