@@ -16,10 +16,10 @@ dependencies:
   shared_preferences: ^2.0.13
   # Curved Navigation
   curved_navigation_bar: ^1.0.3
-  # ResponsiveSizer
-  sizer: ^2.0.15
+  # Firebase
   firebase_core: ^1.17.1
   firebase_database: ^9.0.15
+  firebase_auth: ^3.3.19
 
 dev_dependencies:
   flutter_test:
