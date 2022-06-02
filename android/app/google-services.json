@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1071057996102",
+    "project_id": "kliniku-project-1",
+    "storage_bucket": "kliniku-project-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071057996102:android:dd74cb78d1e7fbbdb0fd47",
+        "android_client_info": {
+          "package_name": "com.tubes.kliniku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071057996102-1347hlf6a37f33ll2rbn8fjobmigqe2j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbCGPw-BSlhD4-80LQSbx-YhCOGwV11R4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071057996102-1347hlf6a37f33ll2rbn8fjobmigqe2j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
