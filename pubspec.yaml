@@ -18,6 +18,8 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   # ResponsiveSizer
   sizer: ^2.0.15
+  firebase_core: ^1.17.1
+  firebase_database: ^9.0.15
 
 dev_dependencies:
   flutter_test:
