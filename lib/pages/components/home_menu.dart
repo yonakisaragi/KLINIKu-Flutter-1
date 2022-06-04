@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kliniku/components/screens/main/DetailDokter.dart';
-import 'package:kliniku/components/screens/main/ListDokter/DokterUmum.dart';
-import 'package:kliniku/components/screens/main/components/model/categories_model.dart';
-import 'package:kliniku/components/screens/main/components/model/jadwal_model.dart';
+import 'package:kliniku/pages/DetailDokter.dart';
+import 'package:kliniku/pages/ListDokter/DokterUmum.dart';
+import 'package:kliniku/pages/components/model/categories_model.dart';
+import 'package:kliniku/pages/components/model/jadwal_model.dart';
 import 'package:kliniku/const.dart';
 
 class HomePage extends StatefulWidget {

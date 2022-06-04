@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kliniku/components/screens/welcome/register_menu.dart';
 import 'package:kliniku/components/widgets/reuse.dart';
 import 'package:kliniku/const.dart';
 
 class LoginMenu extends StatefulWidget {
-  const LoginMenu({Key? key}) : super(key: key);
+  final VoidCallback showRegisterPage;
+  const LoginMenu({Key? key, required this.showRegisterPage}) : super(key: key);
 
   @override
   State<LoginMenu> createState() => _LoginMenuState();
@@ -68,10 +68,7 @@ class _LoginMenuState extends State<LoginMenu> {
       children: <Widget>[
         Text("Belum punya akun? ", style: TextStyle(fontFamily: 'Roboto')),
         GestureDetector(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => RegisterMenu()));
-          },
+          onTap: widget.showRegisterPage,
           child: Text(
             "DAFTAR",
             style: TextStyle(

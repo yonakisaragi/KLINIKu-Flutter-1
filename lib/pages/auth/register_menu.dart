@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kliniku/components/widgets/reuse.dart';
 import 'package:kliniku/const.dart';
 
 class RegisterMenu extends StatefulWidget {
-  const RegisterMenu({Key? key}) : super(key: key);
+  final VoidCallback showLoginPage;
+  const RegisterMenu({Key? key, required this.showLoginPage}) : super(key: key);
 
   @override
   State<RegisterMenu> createState() => _RegisterMenuState();
@@ -15,12 +17,38 @@ class _RegisterMenuState extends State<RegisterMenu> {
 
   // Controller
   final _nameController = new TextEditingController();
-  final _nikController = new TextEditingController();
   final _addrController = new TextEditingController();
   final _noHpController = new TextEditingController();
   final _emailController = new TextEditingController();
   final _passController = new TextEditingController();
   final _confPassController = new TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _addrController.dispose();
+    _noHpController.dispose();
+    _emailController.dispose();
+    _passController.dispose();
+    _confPassController.dispose();
+    super.dispose();
+  }
+
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passController.text.trim());
+    }
+  }
+
+  bool passwordConfirmed() {
+    if (_passController.text.trim() == _confPassController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +61,7 @@ class _RegisterMenuState extends State<RegisterMenu> {
         padding: EdgeInsets.symmetric(vertical: 10),
         minWidth: 200,
         onPressed: () {
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => HomeMenu()));
+          signUp();
         },
         child: Text(
           "DAFTAR",
@@ -47,6 +74,26 @@ class _RegisterMenuState extends State<RegisterMenu> {
           ),
         ),
       ),
+    );
+
+    // Sudah punya akun?
+    final adaAkun = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text("Sudah punya akun? ", style: TextStyle(fontFamily: 'Roboto')),
+        GestureDetector(
+          onTap: widget.showLoginPage,
+          child: Text(
+            "LOGIN",
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
+              color: daftarColor,
+              fontSize: 15,
+            ),
+          ),
+        ),
+      ],
     );
 
     return Scaffold(
@@ -82,9 +129,6 @@ class _RegisterMenuState extends State<RegisterMenu> {
                     rrTextFF(
                         "Nama", _nameController, Icons.person_outline, false),
                     SizedBox(height: 20),
-                    rrTextFF("NIK", _nikController, Icons.card_travel_outlined,
-                        false),
-                    SizedBox(height: 20),
                     rrTextFF(
                         "Alamat", _addrController, Icons.home_outlined, false),
                     SizedBox(height: 20),
@@ -97,10 +141,12 @@ class _RegisterMenuState extends State<RegisterMenu> {
                     rrTextFF(
                         "Password", _passController, Icons.lock_outline, true),
                     SizedBox(height: 20),
-                    rrTextFF("Ulangi password", _confPassController,
+                    rrTextFF("Ulangi Password", _confPassController,
                         Icons.lock_outline, true),
                     SizedBox(height: 20),
-                    sButton
+                    sButton,
+                    SizedBox(height: 20),
+                    adaAkun
                   ],
                 ),
               ),
