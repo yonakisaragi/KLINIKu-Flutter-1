@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kliniku/components/screens/main/components/home_menu.dart';
 import 'package:kliniku/components/screens/main/components/profile_page.dart';
@@ -16,6 +17,7 @@ class MenuPasien extends StatefulWidget {
 class _MenuPasienState extends State<MenuPasien> {
   int index = 0;
   final screens = [HomePage(), StatusPage(), LocationPage()];
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,14 @@ class _MenuPasienState extends State<MenuPasien> {
           Text(
             "Hello pasien!",
             style: TextStyle(color: Colors.black, fontFamily: 'Montserrat'),
+          ),
+          IconButton(
+            padding: const EdgeInsets.only(left: 178),
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+            icon: Icon(Icons.logout),
+            color: Colors.black,
           )
         ],
       ),

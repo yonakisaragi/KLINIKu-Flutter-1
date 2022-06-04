@@ -17,28 +17,30 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: secondaryColor,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20),
-          Padding(
-            padding:
-                const EdgeInsets.only(left: 30, right: 10, top: 10, bottom: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Jadwal Dokter Hari Ini",
-                  style: TextStyle(fontSize: 18, fontFamily: 'Montserrat'),
-                ),
-                SizedBox(height: 15),
-                jadwalDokter(),
-                SizedBox(height: 15),
-                kategoriKlinik()
-              ],
-            ),
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 30, right: 10, top: 10, bottom: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Jadwal Dokter Hari Ini",
+                    style: TextStyle(fontSize: 18, fontFamily: 'Montserrat'),
+                  ),
+                  SizedBox(height: 15),
+                  jadwalDokter(),
+                  SizedBox(height: 15),
+                  kategoriKlinik()
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

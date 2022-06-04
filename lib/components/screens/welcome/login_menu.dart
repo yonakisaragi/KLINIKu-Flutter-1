@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kliniku/components/screens/main/HomePasien.dart';
 import 'package:kliniku/components/screens/welcome/register_menu.dart';
 import 'package:kliniku/components/widgets/reuse.dart';
 import 'package:kliniku/const.dart';
@@ -18,6 +18,21 @@ class _LoginMenuState extends State<LoginMenu> {
   // Controller
   final _emailController = new TextEditingController();
   final _passController = new TextEditingController();
+
+  // Sign In agilfachrian2@gmai.com | password123
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passController.text.trim());
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     // Login Button
@@ -30,8 +45,9 @@ class _LoginMenuState extends State<LoginMenu> {
         minWidth: 200,
         // minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MenuPasien()));
+          signIn();
+          // Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => MenuPasien()));
         },
         child: Text(
           "MASUK",
