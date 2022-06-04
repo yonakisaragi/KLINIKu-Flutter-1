@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kliniku/components/screens/welcome/welcome_screen.dart';
-import 'package:kliniku/components/screens/onboarding/model/onboarding_model.dart';
+import 'package:kliniku/components/screens/model/onboarding_model.dart';
+import 'package:kliniku/pages/Auth_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoard extends StatefulWidget {
@@ -44,7 +44,7 @@ class _OnBoardState extends State<OnBoard> {
               onPressed: () async {
                 await _storeOnBoardInfo();
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: ((context) => WelcomeScreen())));
+                    MaterialPageRoute(builder: ((context) => Authpage())));
               },
               child: Text(
                 "Skip",
@@ -120,7 +120,7 @@ class _OnBoardState extends State<OnBoard> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => WelcomeScreen()));
+                                builder: (context) => Authpage()));
                       }
                       _pageController.nextPage(
                           duration: Duration(milliseconds: 300),

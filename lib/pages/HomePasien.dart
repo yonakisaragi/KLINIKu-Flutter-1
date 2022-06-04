@@ -1,11 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:kliniku/components/screens/main/components/home_menu.dart';
-import 'package:kliniku/components/screens/main/components/profile_page.dart';
 import 'package:kliniku/const.dart';
-import 'components/location_menu.dart';
-import 'components/status_menu.dart';
+import 'package:kliniku/pages/components/home_menu.dart';
+import 'package:kliniku/pages/components/location_menu.dart';
+import 'package:kliniku/pages/components/profile_page.dart';
+import 'package:kliniku/pages/components/status_menu.dart';
 
 class MenuPasien extends StatefulWidget {
   const MenuPasien({Key? key}) : super(key: key);
