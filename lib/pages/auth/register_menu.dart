@@ -86,7 +86,7 @@ class _RegisterMenuState extends State<RegisterMenu> {
           child: Text(
             "LOGIN",
             style: TextStyle(
-              fontFamily: 'Roboto',
+              fontFamily: 'Montserrat',
               fontWeight: FontWeight.bold,
               color: daftarColor,
               fontSize: 15,
