@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kliniku/components/widgets/reuse.dart';
 import 'package:kliniku/const.dart';
+import 'package:kliniku/pages/auth/forgotPass_menu.dart';
 
 class LoginMenu extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -21,9 +22,32 @@ class _LoginMenuState extends State<LoginMenu> {
 
   // Sign In agilfachrian2@gmai.com | password123
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passController.text.trim());
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passController.text.trim());
+      print("Login email as : " + _emailController.text.trim());
+    } on FirebaseAuthException catch (e) {
+      print(e);
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("KESALAHAN",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Nunito',
+                      color: Colors.red)),
+              content: Text("Email atau password salah",
+                  style: TextStyle(fontFamily: 'Nunito')),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text("OK"))
+              ],
+            );
+          });
+    }
   }
 
   @override
@@ -72,7 +96,7 @@ class _LoginMenuState extends State<LoginMenu> {
           child: Text(
             "DAFTAR",
             style: TextStyle(
-              fontFamily: 'Roboto',
+              fontFamily: 'Montserrat',
               fontWeight: FontWeight.bold,
               color: daftarColor,
               fontSize: 15,
@@ -126,7 +150,30 @@ class _LoginMenuState extends State<LoginMenu> {
                       rTextFF(_emailController, Icons.email_outlined, false),
                       SizedBox(height: 20),
                       rTextFF(_passController, Icons.lock_outline, true),
-                      SizedBox(height: 30),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: ((context) {
+                                return ForgotPassword();
+                              })));
+                            },
+                            child: Text(
+                              "Lupa Password?",
+                              style: TextStyle(
+                                color: daftarColor,
+                                fontSize: 15,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 20),
                       lButton,
                       SizedBox(height: 20),
                       belumdaftar
