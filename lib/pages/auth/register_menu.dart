@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kliniku/components/widgets/reuse.dart';
@@ -35,12 +36,17 @@ class _RegisterMenuState extends State<RegisterMenu> {
   }
 
   Future signUp() async {
+    // Auth User
     try {
+      // Buat User (Email & Password)
       if (passwordConfirmed()) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: _emailController.text.trim(),
             password: _passController.text.trim());
       }
+      // Tambah Detail User
+      adduserDetails(_nameController.text.trim(), _addrController.text.trim(),
+          _noHpController.text.trim(), _emailController.text.trim());
     } on FirebaseAuthException catch (e) {
       print(e.code);
       showDialog(
@@ -56,6 +62,13 @@ class _RegisterMenuState extends State<RegisterMenu> {
             }
           });
     }
+  }
+
+  Future adduserDetails(
+      String name, String addr, String phoneNum, String email) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .add({'nama': name, 'alamat': addr, 'noHp': phoneNum, 'email': email});
   }
 
   bool passwordConfirmed() {
