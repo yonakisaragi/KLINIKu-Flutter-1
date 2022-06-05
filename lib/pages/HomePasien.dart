@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,26 @@ class _MenuPasienState extends State<MenuPasien> {
   final screens = [HomePage(), StatusPage(), LocationPage()];
   final user = FirebaseAuth.instance.currentUser;
 
+  // documents IDs
+  List<String> docIDs = [];
+
+  // get docIDs
+  Future getDocID() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .get()
+        .then((snapshot) => snapshot.docs.forEach((document) {
+              print(document.reference);
+              docIDs.add(document.reference.id);
+            }));
+  }
+
+  @override
+  void initState() {
+    getDocID();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final items = <Widget>[
@@ -37,13 +58,10 @@ class _MenuPasienState extends State<MenuPasien> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      // titleSpacing: 0,
       automaticallyImplyLeading: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
       title: Row(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           IconButton(
               onPressed: () {
