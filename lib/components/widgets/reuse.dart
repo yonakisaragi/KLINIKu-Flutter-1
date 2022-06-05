@@ -84,3 +84,18 @@ TextFormField rrTextFF(
     ),
   );
 }
+
+AlertDialog alertBox(BuildContext context, String errorText) {
+  return AlertDialog(
+    title: Text("KESALAHAN",
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Nunito',
+            color: Colors.red)),
+    content: Text(errorText, style: TextStyle(fontFamily: 'Nunito')),
+    actions: [
+      TextButton(
+          onPressed: () => Navigator.of(context).pop(), child: Text("OK"))
+    ],
+  );
+}

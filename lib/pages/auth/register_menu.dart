@@ -35,10 +35,26 @@ class _RegisterMenuState extends State<RegisterMenu> {
   }
 
   Future signUp() async {
-    if (passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passController.text.trim());
+    try {
+      if (passwordConfirmed()) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passController.text.trim());
+      }
+    } on FirebaseAuthException catch (e) {
+      print(e.code);
+      showDialog(
+          context: context,
+          builder: (context) {
+            switch (e.code) {
+              case "email-already-in-use":
+                return alertBox(context, "Email sudah dipakai");
+              case "weak-password":
+                return alertBox(context, "Password terlalu lemah");
+              default:
+                return alertBox(context, "Terdapat kesalahan");
+            }
+          });
     }
   }
 
