@@ -41,7 +41,7 @@ class _LoginMenuState extends State<LoginMenu> {
               content: Text("Email atau password salah",
                   style: TextStyle(fontFamily: 'Nunito')),
               actions: [
-                FlatButton(
+                TextButton(
                     onPressed: () => Navigator.of(context).pop(),
                     child: Text("OK"))
               ],
