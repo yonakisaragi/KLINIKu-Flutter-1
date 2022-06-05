@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kliniku/components/widgets/reuse.dart';
 import 'package:kliniku/const.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -30,28 +31,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           });
       print(_emailController.text.trim());
     } on FirebaseAuthException catch (e) {
-      print(e);
+      print(e.code);
       showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
-              title: Text(
-                "KESALAHAN",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Nunito',
-                    color: Colors.red),
-              ),
-              content: Text(
-                "Tidak ada Email yang terdaftar atau salah memasukkan email",
-                style: TextStyle(fontFamily: 'Nunito'),
-              ),
-              actions: [
-                TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text("OK"))
-              ],
-            );
+            switch (e.code) {
+              case "user-not-found":
+                return alertBox(context, "Email belum terdaftar");
+              case "invalid-email":
+                return alertBox(context, "Email tidak sesuai format");
+              default:
+                return alertBox(context, "Terdapat kesalahan");
+            }
           });
     }
   }

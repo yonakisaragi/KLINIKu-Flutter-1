@@ -28,24 +28,20 @@ class _LoginMenuState extends State<LoginMenu> {
           password: _passController.text.trim());
       print("Login email as : " + _emailController.text.trim());
     } on FirebaseAuthException catch (e) {
-      print(e);
+      print(e.code);
       showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
-              title: Text("KESALAHAN",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Nunito',
-                      color: Colors.red)),
-              content: Text("Email atau password salah",
-                  style: TextStyle(fontFamily: 'Nunito')),
-              actions: [
-                TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text("OK"))
-              ],
-            );
+            switch (e.code) {
+              case "user-not-found":
+                return alertBox(context, "Email tidak ditemukan");
+              case "wrong-password":
+                return alertBox(context, "Password salah");
+              case "too-many-requests":
+                return alertBox(context, "Terlalu banyak request saat login");
+              default:
+                return alertBox(context, "Terdapat kesalahan");
+            }
           });
     }
   }
