@@ -47,7 +47,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 style: TextStyle(fontFamily: 'Nunito'),
               ),
               actions: [
-                FlatButton(
+                TextButton(
                     onPressed: () => Navigator.of(context).pop(),
                     child: Text("OK"))
               ],
